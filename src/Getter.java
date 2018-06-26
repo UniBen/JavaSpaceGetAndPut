@@ -3,16 +3,12 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Getter extends JFrame {
-	private static int FIVE_SECOMDS= 1000 * 5;  //1000 miliseconds, multiplied by 5
+	private static int FIVE_SECOMDS = 1000 * 5;  //1000 miliseconds, multiplied by 5
 
 	private JavaSpace space;
-	
-	private JPanel jPanel1,jPanel2;
-	private JLabel textLabel;
-	private JTextField outString;
-	private JButton getButton;
+    private JTextField outString;
 
-	public Getter() {
+    public Getter() {
 		space = SpaceUtils.getSpace();
 		if (space == null){
 			System.err.println("Failed to find the javaspace");
@@ -20,12 +16,11 @@ public class Getter extends JFrame {
 		}
 
 		initComponents ();
-		pack();
+		this.setSize(300,150);
 	}
 
 	private void initComponents() {
 		setTitle("JavaSpaces Getter");
-
 		addWindowListener (new java.awt.event.WindowAdapter () {
 			public void windowClosing (java.awt.event.WindowEvent evt) {
 				exitForm (evt);
@@ -35,12 +30,13 @@ public class Getter extends JFrame {
 		Container cp = getContentPane();
 		cp.setLayout(new BorderLayout());
 
-		jPanel1 = new JPanel();
+        JPanel jPanel1 = new JPanel();
 		jPanel1.setLayout (new FlowLayout ());
-		jPanel2 = new JPanel();
+
+        JPanel jPanel2 = new JPanel();
 		jPanel2.setLayout (new FlowLayout ());
 
-		textLabel = new JLabel();
+        JLabel textLabel = new JLabel();
 		textLabel.setText ("Value retreived ");
 		jPanel1.add(textLabel);
 
@@ -50,7 +46,7 @@ public class Getter extends JFrame {
 
 		cp.add (jPanel1, "North");
 
-		getButton = new JButton();
+        JButton getButton = new JButton();
 		getButton.setText(" Get ");
 		getButton.addActionListener (new java.awt.event.ActionListener () {
 			public void actionPerformed (java.awt.event.ActionEvent evt) {
@@ -79,7 +75,8 @@ public class Getter extends JFrame {
 		}
 	}
 
+
 	public static void main(String[] args) {
 		new Getter().setVisible(true);
-	}    
+	}
 }
