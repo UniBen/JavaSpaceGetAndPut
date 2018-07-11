@@ -42,6 +42,7 @@ public class Getter extends JFrame {
 
 		outString = new JTextField(12);
 		outString.setText("");
+		outString.setEditable(false);
 		jPanel1.add(outString);
 
 		cp.add (jPanel1, "North");

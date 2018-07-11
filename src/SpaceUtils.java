@@ -1,60 +1,62 @@
 import net.jini.space.JavaSpace;
 import net.jini.core.transaction.server.TransactionManager;
-import java.rmi.RMISecurityManager;
 import net.jini.core.discovery.LookupLocator;
 import net.jini.core.lookup.ServiceRegistrar;
 import net.jini.core.lookup.ServiceTemplate;
-import net.jini.core.lookup.ServiceMatches;
 
 public class SpaceUtils {
 
-	public static JavaSpace getSpace(String hostname) {
-		JavaSpace js = null;
-		try {
-			LookupLocator l = new LookupLocator("jini://" + hostname);
+    public static JavaSpace getSpace(String hostname) {
+        if (System.getSecurityManager() == null) {
+            System.setSecurityManager(new SecurityManager());
+        }
 
-			ServiceRegistrar sr = l.getRegistrar();
+        JavaSpace js = null;
+        try {
+            LookupLocator l = new LookupLocator("jini://" + hostname);
 
-			Class c = Class.forName("net.jini.space.JavaSpace");
-			Class[] classTemplate = {c};
+            ServiceRegistrar sr = l.getRegistrar();
 
-			js = (JavaSpace) sr.lookup(new ServiceTemplate(null, classTemplate, null));
+            Class c = Class.forName("net.jini.space.JavaSpace");
+            Class[] classTemplate = {c};
 
-		} catch (Exception e) {
-			System.err.println("Error: " + e);
-		}
-		return js;
-	}
+            js = (JavaSpace) sr.lookup(new ServiceTemplate(null, classTemplate, null));
 
-	public static JavaSpace getSpace() {
-		return getSpace("waterloo");
-	}
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        }
+        return js;
+    }
+
+    public static JavaSpace getSpace() {
+        return getSpace("lepton");
+    }
 
 
-	public static TransactionManager getManager(String hostname) {
-		if (System.getSecurityManager() == null) {
-			System.setSecurityManager(new RMISecurityManager());
-		}
+    public static TransactionManager getManager(String hostname) {
+        if (System.getSecurityManager() == null) {
+            System.setSecurityManager(new SecurityManager());
+        }
 
-		TransactionManager tm = null;
-		try {
-			LookupLocator l = new LookupLocator("jini://" + hostname);
+        TransactionManager tm = null;
+        try {
+            LookupLocator l = new LookupLocator("jini://" + hostname);
 
-			ServiceRegistrar sr = l.getRegistrar();
+            ServiceRegistrar sr = l.getRegistrar();
 
-			Class c = Class.forName("net.jini.core.transaction.server.TransactionManager");
-			Class[] classTemplate = {c};
+            Class c = Class.forName("net.jini.core.transaction.server.TransactionManager");
+            Class[] classTemplate = {c};
 
-			tm = (TransactionManager) sr.lookup(new ServiceTemplate(null, classTemplate, null));
+            tm = (TransactionManager) sr.lookup(new ServiceTemplate(null, classTemplate, null));
 
-		} catch (Exception e) {
-			System.err.println("Error: " + e);
-		}
-		return tm;
-	}
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        }
+        return tm;
+    }
 
-	public static TransactionManager getManager() {
-		return getManager("waterloo");
-	}
+    public static TransactionManager getManager() {
+        return getManager("lepton");
+    }
 }
 
