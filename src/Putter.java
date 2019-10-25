@@ -7,7 +7,7 @@ public class Putter extends JFrame {
 
     private JavaSpace space;
 
-    private JTextField inString, inCount;
+    private JTextField inString, authorString, inCount;
 
 
     public Putter() {
@@ -35,28 +35,50 @@ public class Putter extends JFrame {
         JPanel jPanel1 = new JPanel();
         jPanel1.setLayout (new FlowLayout (FlowLayout.LEFT));
 
+        JPanel jPanel1a = new JPanel();
+        jPanel1a.setLayout (new FlowLayout (FlowLayout.LEFT));
+        JPanel jPanel1b = new JPanel();
+        jPanel1b.setLayout (new FlowLayout (FlowLayout.LEFT));
+
+        // Text label
         JLabel textLabel = new JLabel();
         textLabel.setText ("Text to insert: ");
-        jPanel1.add (textLabel);
+        jPanel1a.add (textLabel);
 
+        // Text string
         inString = new JTextField (12);
         inString.setText ("");
+        jPanel1a.add (inString);
 
-        jPanel1.add (inString);
+        // Author label
+        JLabel authorLabel = new JLabel();
+        authorLabel.setText ("Author: ");
+        jPanel1b.add (authorLabel);
 
+        // Author string
+        authorString = new JTextField (12);
+        authorString.setText ("");
+        jPanel1b.add (authorString);
 
+        // Populate jPanel1
+        jPanel1.add(jPanel1a, "North");
+        jPanel1.add(jPanel1b, "South");
+
+        // Jpanel2
         JPanel jPanel2 = new JPanel();
         jPanel2.setLayout (new FlowLayout (FlowLayout.LEFT));
 
+        // Count label
         JLabel countLabel = new JLabel();
         countLabel.setText("Number to Insert (1 to 5): ");
         jPanel2.add (countLabel);
 
+        //  Count input
         inCount = new JTextField (3);
         inCount.setText("");
         jPanel2.add(inCount);
 
-
+        // Add one button
         JPanel jPanel3 = new JPanel();
         jPanel3.setLayout (new FlowLayout ());
 
@@ -70,6 +92,7 @@ public class Putter extends JFrame {
 
         jPanel3.add (putButton);
 
+        // Add many button
         JButton putManyButton = new JButton();
         putManyButton.setText ("Insert  Lots");
         putManyButton.addActionListener (new java.awt.event.ActionListener () {
@@ -80,7 +103,7 @@ public class Putter extends JFrame {
 
         jPanel3.add (putManyButton);
 
-
+        // Panels
         cp.add (jPanel1, "North");
         cp.add (jPanel2, "Center");
         cp.add (jPanel3, "South");
@@ -89,7 +112,7 @@ public class Putter extends JFrame {
 
     private void writeMany (java.awt.event.ActionEvent evt) {
         try {
-            Sobj str = new Sobj(inString.getText());
+            Sobj str = new Sobj(inString.getText(), authorString.getText());
             int count = new Integer(inCount.getText());
             if (count > 20)
                 JOptionPane.showMessageDialog(this,
@@ -123,7 +146,7 @@ public class Putter extends JFrame {
 
     private void writeSobj (java.awt.event.ActionEvent evt) {
         try {
-            Sobj str = new Sobj(inString.getText());
+            Sobj str = new Sobj(inString.getText(), authorString.getText());
             space.write( str, null, ONE_MINUTE);
         } catch ( Exception e) {
             e.printStackTrace();

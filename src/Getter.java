@@ -7,6 +7,7 @@ public class Getter extends JFrame {
 
 	private JavaSpace space;
     private JTextField outString;
+    private JTextField authorString;
 
     public Getter() {
 		space = SpaceUtils.getSpace();
@@ -36,8 +37,12 @@ public class Getter extends JFrame {
         JPanel jPanel2 = new JPanel();
 		jPanel2.setLayout (new FlowLayout ());
 
+        JPanel jPanel3 = new JPanel();
+		jPanel2.setLayout (new FlowLayout ());
+
+		// North
         JLabel textLabel = new JLabel();
-		textLabel.setText ("Value retreived ");
+		textLabel.setText ("Value retrieved ");
 		jPanel1.add(textLabel);
 
 		outString = new JTextField(12);
@@ -47,6 +52,19 @@ public class Getter extends JFrame {
 
 		cp.add (jPanel1, "North");
 
+		// Center
+        JLabel authorLabel = new JLabel();
+		authorLabel.setText ("Author ");
+		jPanel2.add(authorLabel);
+
+		authorString = new JTextField(12);
+		authorString.setText("");
+		authorString.setEditable(false);
+		jPanel2.add(authorString);
+
+		cp.add (jPanel2, "Center");
+
+		//  Southerner (Ew!)
         JButton getButton = new JButton();
 		getButton.setText(" Get ");
 		getButton.addActionListener (new java.awt.event.ActionListener () {
@@ -55,8 +73,8 @@ public class Getter extends JFrame {
 			}
 		}   );
 
-		jPanel2.add(getButton);
-		cp.add (jPanel2, "Center");
+		jPanel3.add(getButton);
+		cp.add (jPanel3, "South");
 	}
 
 	private void exitForm(java.awt.event.WindowEvent evt) {
